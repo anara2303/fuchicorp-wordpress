@@ -5,26 +5,23 @@
 replicaCount: 1
 
 image:
-  repository: nginx
-  tag: stable
+  repository: wordpress:5.1.1-php7.1-apache
   pullPolicy: IfNotPresent
-
-nameOverride: ""
-fullnameOverride: ""
 
 service:
   type: ClusterIP
   port: 80
 
 ingress:
-  enabled: false
+  enabled: true
   annotations: {}
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
   path: /
   hosts:
-    - chart-example.local
+    - test-wordpress@fuchicorp.com
   tls: []
+    secretName: workdpress-tls-prod
   #  - secretName: chart-example-tls
   #    hosts:
   #      - chart-example.local
