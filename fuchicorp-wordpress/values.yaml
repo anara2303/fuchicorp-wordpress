@@ -5,8 +5,8 @@
 replicaCount: 1
 
 image:
-  repository: wordpress 
-  tag: 5.1.1-php7.1-apache 
+  repository: docker pull wordpress
+  tag: latest 
   pullPolicy: IfNotPresent       #we need to check where we will get ????    
 
 service:
