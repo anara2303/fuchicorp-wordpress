@@ -7,29 +7,27 @@ replicaCount: 1
 image:
   repository: wordpress
   tag: 5.2.3-php7.1-apache
-  pullPolicy: IfNotPresent       #we need to check where we will get ????    
+  pullPolicy: IfNotPresent
+
+nameOverride: ""
+fullnameOverride: ""
 
 service:
-  type: ClusterIP     #which type of the service we will use ??/
+  type: ClusterIP
   port: 80
-  target port: 7102
+
 ingress:
   enabled: true
-  annotations: 
-     kubernetes.io/ingress.class: nginx
-     kubernetes.io/tls-acme: "true"
-     certmanager.k8s.io/cluster-issuer: letsencrypt-staging
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    certmanager.k8s.io/cluster-issuer: letsencrypt-fuchicorp-prod
   path: /
   hosts:
     - test-wordpress.fuchicorp.com
-  tls: 
-    - secretName: wordpress-tls
-      hosts:
-        - test-wordpress.fuchicorp.com
-  #secretName: workdpress-tls-prod
-  #  - secretName: chart-example-tls
-  #    hosts:
-  #      - chart-example.local
+  tls:
+   - secretName: test-wordpress-fuchicorp-prod
+     hosts:
+       - test-wordpress.fuchicorp.com
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
@@ -42,11 +40,6 @@ resources: {}
   # requests:
   #  cpu: 100m
   #  memory: 128Mi
-  
-#imageSecret:   ### we check out after know where we getting image !!!!
-#  enabled: true
-#  allSecrets:
-#  - name: nexus-creds
 
 nodeSelector: {}
 

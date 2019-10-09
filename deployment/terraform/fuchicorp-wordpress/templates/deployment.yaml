@@ -19,17 +19,13 @@ spec:
         app.kubernetes.io/name: {{ include "fuchicorp-wordpress.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
-{{- if .Values.imageSecret.enabled }}
-      imagePullSecrets:
-{{ toYaml .Values.imageSecret.allSecrets | indent 12 }}
-{{- end }}
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
-              containerPort: 80 ### do we need to target port ?????
+              containerPort: 80
               protocol: TCP
           livenessProbe:
             httpGet:
