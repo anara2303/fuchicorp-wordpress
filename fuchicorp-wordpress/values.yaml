@@ -6,13 +6,13 @@ replicaCount: 1
 
 image:
   repository: wordpress
-  tag: latest 
+  tag: 5.2.3-php7.1-apache
   pullPolicy: IfNotPresent       #we need to check where we will get ????    
 
 service:
   type: ClusterIP     #which type of the service we will use ??/
   port: 80
-
+  target port: 7102
 ingress:
   enabled: true
   annotations: 
@@ -21,7 +21,7 @@ ingress:
      certmanager.k8s.io/cluster-issuer: letsencrypt-staging
   path: /
   hosts:
-    - wordpress.fuchicorp.com
+    - test-wordpress.fuchicorp.com
   tls: 
     - secretName: wordpress-tls
       hosts:
