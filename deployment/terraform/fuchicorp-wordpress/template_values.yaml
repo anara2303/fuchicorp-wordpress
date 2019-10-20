@@ -5,8 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: wordpress
-  tag: 5.2.3-php7.1-apache
+  repository: ${docker_image}
   pullPolicy: IfNotPresent
 
 nameOverride: ""
@@ -23,11 +22,11 @@ ingress:
     certmanager.k8s.io/cluster-issuer: letsencrypt-fuchicorp-prod
   path: /
   hosts:
-    - test-wordpress.fuchicorp.com
+    - ${deployment_endpoint}
   tls:
-   - secretName: test-wordpress-fuchicorp-prod
+   - secretName: wordpress-tls
      hosts:
-       - test-wordpress.fuchicorp.com
+       - ${deployment_endpoint}
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
@@ -46,3 +45,8 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+imagePullSecrets:
+  enabled: true
+  allSecrets:
+  - name: nexus-creds
