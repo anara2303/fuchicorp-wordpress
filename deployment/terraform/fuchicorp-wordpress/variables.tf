@@ -1,7 +1,7 @@
 variable "name" {
   default = "fuchicorp-wordpress"
 }
-variable "fuchicorp" {
+variable "chart" {
     default = "./fuchicorp-wordpress"
   
 }
