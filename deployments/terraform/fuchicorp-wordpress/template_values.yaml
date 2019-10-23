@@ -46,7 +46,7 @@ tolerations: []
 
 affinity: {}
 
-imagePullSecrets:
+imageSecret:
   enabled: true
   allSecrets:
   - name: nexus-creds
